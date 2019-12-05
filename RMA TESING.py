@@ -4,6 +4,50 @@ from pandas import ExcelFile
 from pandas import ExcelWriter
 from datetime import datetime
 
+
+def mainMenu():
+    print('### Soft for rma test ### alpha 0.3v\n')
+    print('### Trying to connect to rma container file ##')
+    
+    ## read csf file
+    
+    #EXCEL_FILE = "C:/Users/Golubev/Documents/RMAFILE.xlsx"
+    EXCEL_FILE = "rmatest.xlsx"
+    
+    df = pd.read_excel(EXCEL_FILE, sheet_name="OutERP")
+    
+    print("\n Succsefull parsed next index : {}".format(df.columns))
+    
+    #print("Choose option:\n1. Add RMA\n2. Find RMA\n\n")
+    
+    var_x = ""
+    var_xx = ""
+    
+    while(var_x != "0"):
+        print("\nChoose option:\n 1. Add RMA\n 2. Find RMA\n 3. Return rows of file\n 0. Exit() ")
+        var_x = input(': ')
+        if var_x == "1":
+            add_rma(df)
+            var_x = ""
+        if var_x == "2":
+            var_xx = input('\n 1. Fild solo SN? \n 2. Find all SN in box?\n 3. Show all boxes\n 0. Return to menu\n : ')
+            df = pd.read_excel(EXCEL_FILE, sheet_name="OutERP")
+            if var_xx == "1":
+                SN = input('SN : ')
+                search_SN(SN, df)
+                var_x, var_xx = "", ""
+            elif  var_xx == "2":
+                BOX = input('Box : ')
+                srch_all_SN_box(BOX, df)
+                var_x, var_xx = "", ""
+            elif var_xx == "3":
+                show_boxes(df)
+                var_x, var_xx = "", ""
+
+        if var_x == "3":
+            count_Len_xlx(df)
+            var_x = ""    
+            
 def add_rma(df_temp):
     print("### Adding to file new RMA### \n")
     new_Rma = input('SN : ')
@@ -107,88 +151,29 @@ def show_boxes(df_temp):
     print("\n###    FROM AIDE    ###\n")
     for i in range(len(aidelist)):
         print(aidelist[i])
-    print("\n###    END AIDE    ###\n")
+    print("\n###    END AIDE    ###")
     
     print("\n###    FROM DR service    ###\n")
     for i in range(len(doctorSrlist)):
         print(doctorSrlist[i])
-    print("\n###    END DR service    ###\n")
+    print("\n###    END DR service    ###")
     
     print("\n###    FROM Inj service    ###\n")
     for i in range(len(InjSrlist)):
         print(InjSrlist[i])
-    print("\n###    END Inj service    ###\n")
+    print("\n###    END Inj service    ###")
     
     print("\n###    FROM Mobile service    ###\n")
     for i in range(len(MbSrlist)):
         print(MbSrlist[i])
-    print("\n###    END Mobile service    ###\n")
+    print("\n###    END Mobile service    ###")
     
     print("\n###    FROM Orion service    ###\n")
     for i in range(len(OrionSrlist)):
         print(OrionSrlist[i])    
-    print("\n###    END Orion service    ###\n")
+    print("\n###    END Orion service    ###")
 
 def count_Len_xlx(df_temp):
     print("\nRows in file : {}".format(len(df_temp)))
-
-
-
-
-# --------------------------- 
-
-
-
-
-print('### Soft for rma test ### alpha 0.3v\n')
-print('### Trying to connect to rma container file ##')
-
-## read csf file
-
-#EXCEL_FILE = "C:/Users/Golubev/Documents/RMAFILE.xlsx"
-EXCEL_FILE = "rmatest.xlsx"
-
-df = pd.read_excel(EXCEL_FILE, sheet_name="OutERP")
-
-print("\n Succsefull parsed next index : {}".format(df.columns))
-
-#print("Choose option:\n1. Add RMA\n2. Find RMA\n\n")
-
-var_x = ""
-var_xx = ""
-
-while(var_x != "0"):
-    print("\nChoose option:\n 1. Add RMA\n 2. Find RMA\n 3. Return rows of file\n 0. Exit() ")
-    var_x = input(': ')
     
-    if var_x == "1":
-        add_rma(df)
-        var_x = ""
-
-    if var_x == "2":
-        var_xx = input('\n 1. Fild solo SN? \n 2. Find all SN in box?\n 3. Show all boxes\n 0. Return to menu\n : ')
-        df = pd.read_excel(EXCEL_FILE, sheet_name="OutERP")
-        if var_xx == "1":
-            SN = input('SN : ')
-            search_SN(SN, df)
-            var_x, var_xx = "", ""
-        elif  var_xx == "2":
-            BOX = input('Box : ')
-            srch_all_SN_box(BOX, df)
-            var_x, var_xx = "", ""
-        elif var_xx == "3":
-            show_boxes(df)
-            var_x, var_xx = "", ""
-            
-        
-    if var_x == "3":
-        count_Len_xlx(df)
-        var_x = ""
-        
-    
-    
-    
-
-
-
-
+mainMenu()
