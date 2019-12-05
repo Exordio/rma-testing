@@ -5,7 +5,8 @@ from pandas import ExcelWriter
 from datetime import datetime
 
 
-def mainMenu():
+
+def mainMenu(): # Start here
     print('### Soft for rma test ### alpha 0.3v\n')
     print('### Trying to connect to rma container file ##')
     
